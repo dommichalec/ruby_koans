@@ -21,8 +21,16 @@ def triangle(a, b, c)
   else
     :scalene
   end
+  # fail overs here
+
+  fail TriangleError if [a, b, c].min <= 0
+  fail TriangleError if [a,b,c].min <= 0
+  x, y, z = [a,b,c].sort
+  fail TriangleError if x + y <= z
+  [:equilateral,:isosceles,:scalene].fetch([a,b,c].uniq.size - 1)
 end
 
 # Error class used in part 2.  No need to change this code.
 class TriangleError < StandardError
+
 end
